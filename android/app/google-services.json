@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "29138230650",
+    "project_id": "abujulia",
+    "storage_bucket": "abujulia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29138230650:android:58f4209f3e8063b41b0ac3",
+        "android_client_info": {
+          "package_name": "com.example.abu_julia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29138230650-ooa0445iv006ib7i0amvltm10bk39dj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtaeHSQTH3xGPGqNvN6rpEfySUaF16d74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29138230650-ooa0445iv006ib7i0amvltm10bk39dj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
