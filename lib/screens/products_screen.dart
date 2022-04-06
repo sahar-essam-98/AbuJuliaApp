@@ -1,7 +1,10 @@
+import 'package:abu_julia/providers/product.dart';
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -13,11 +16,17 @@ class ProductsScreen extends StatefulWidget {
 class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
+    final prvider = Provider.of<ProductProvider>(context);
+    Map? route = ModalRoute.of(context)?.settings.arguments as Map?;
+    late String title;
+    if(route != null){
+        title = route["title"];
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'مشــاوي',
+          title,
           style: TextStyle(color: black, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
@@ -43,9 +52,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: 10,
+        itemCount: prvider.productsByCategory.length,
         itemBuilder: (_, index) => GestureDetector(
-          onTap: () {
+          onTap: () async{
+            await Provider.of<ProductProvider>(context,listen: false).loadProductById(productId: prvider.productsByCategory[index].id);
             Navigator.pushNamed(context, '/product_details_dcreen');
           },
           child: Container(
@@ -61,9 +71,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15.r),
-                  child: Image.asset(
-                    'assets/s.jpg',
-                    fit: BoxFit.fill,
+                  child:  FadeInImage.memoryNetwork(
+                    image: prvider.productsByCategory[index].image,
+                    width: double.infinity,
+                    height: 134.h,
+                    fit: BoxFit.cover,
+                    placeholder: kTransparentImage,
                   ),
                 ),
                 Padding(
@@ -85,7 +98,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     child: Row(
                       children: [
                         Text(
-                          ' مشاوي كباب',
+                          prvider.productsByCategory[index].name,
                           maxLines: 2,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -94,19 +107,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        // RatingBar.builder(
-                        //   minRating: 1,
-                        //   onRatingUpdate: (rating){
-                        //     setState(() {
-                        //
-                        //     });
-                        //   },
-                        //   itemBuilder: (context, _) => Icon(
-                        //     Icons.star,
-                        //     color: Colors.amber,
-                        //     size: 5,
-                        //   ),
-                        // ),
+
+                        Text(
+                           prvider.productsByCategory[index].rate.toString(),style: TextStyle(color: Colors.white),
+                         ),
                       ],
                     ),
                   ),

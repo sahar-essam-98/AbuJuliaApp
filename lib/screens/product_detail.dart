@@ -5,6 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
+
+import '../models/favourit.dart';
+import '../providers/fav_provider.dart';
+import '../providers/product.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   @override
@@ -14,6 +20,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   double rating = 0;
+  bool isadd = false;
 
 
   void initState() {
@@ -23,7 +30,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    final prvider = Provider.of<ProductProvider>(context,listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -51,10 +58,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.r),
-                child: Image.asset(
-                  'assets/s3.jpg',
+                child: FadeInImage.memoryNetwork(
                   width: double.infinity,
                   fit: BoxFit.cover,
+                  placeholder: kTransparentImage,
+                  image: prvider.singleProduct.image,
                 ),
               ),
             ),
@@ -62,15 +70,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'بيتــزا الريحان',
+                  prvider.singleProduct.name,
                   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.sp),
                 ),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async{
+                    Favourie fav = Favourie(prvider.singleProduct.id,prvider.singleProduct.name,prvider.singleProduct.image);
+                   setState(() async {
+                      isadd = await Provider.of<FavProvider>(context, listen: false).create(fav);
+                   });
+                    if(isadd){
+                    print("add sucssffully")  ;
+                    }
                   },
                   icon: Icon(
                     Icons.favorite,
-                    color: Colors.red,
+                    color:isadd? Colors.red : Colors.grey,
                     size: 30,
                   ),
                 ),
@@ -82,6 +97,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 onRatingUpdate: (rating){
                   setState(() {
                     this.rating= rating;
+                    prvider.addRate(prvider.singleProduct.id, rating.toString());
 
                   });
                 },
@@ -97,7 +113,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.sp),
             ),
             Text(
-              'بندورة، دقيق، ريحان، زيتون، ملح، زيت زيتون، فطر، جبنة',
+              prvider.singleProduct.components,
               style: TextStyle(fontSize: 14.sp),
             ),
             SizedBox(
@@ -108,11 +124,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.sp),
             ),
             Text(
-              'اعجن العجينة وضعها في الصينية\n'
-              'ضع3/4 كوب صوص وافرده جيدا على العجين \n'
-              'ضع الجبن فوق الصوص ثم ضع شرائح الطماطم'
-              ' \nضع التوابل المفضلة فوق الطماطم'
-              'ضع الصينية في الفرن لمدة 12 دقيقة \n',
+              prvider.singleProduct.wayWork,
               style: TextStyle(fontSize: 14.sp),
             ),
             SizedBox(height: 5.h,),
@@ -121,14 +133,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: ElevatedButton(
                 style: TextButton.styleFrom(
                   minimumSize: const Size(0, 45),
-                  primary: const Color(0xff0163BE),
                   backgroundColor: primary,
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, 'video_screen');
                 },
                 child: const Text(
-                  'مشاهـدة االفيديـو',
+                  'مشاهـدة الفيديـو',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                 ),
               ),
@@ -143,7 +154,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     child: ElevatedButton(
                       style: TextButton.styleFrom(
                         minimumSize: const Size(0, 35),
-                        primary: const Color(0xff0163BE),
                         backgroundColor: primary,
                       ),
                       onPressed: () {
@@ -151,7 +161,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           context: context,
-                          builder: (context) => ShowComment(),);
+                          builder: (context) => ShowComment(prvider.singleProduct.id),);
                         // builder: (context) => ShowVisitorComment(),
                         // );
                       },
@@ -175,7 +185,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
                             context: context,
-                            builder: (context) => AddComment());
+                            builder: (context) => AddComment(prvider.singleProduct.id));
                         // builder: (context) => AddVisitorComment(),
                         // );
                       },

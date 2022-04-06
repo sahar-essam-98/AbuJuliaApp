@@ -1,4 +1,4 @@
-import 'dart:html';
+
 
 import 'package:abu_julia/models/comments.dart';
 import 'package:abu_julia/models/products.dart';
@@ -11,10 +11,10 @@ class CommentsServices{
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 
-  Future<List<Comments>> getProductsOfCategory({required String productId}) async =>
+  Future<List<Comments>> getComments({required String productId}) async =>
       _firestore
           .collection(collection)
-          .where("category", isEqualTo: productId)
+          .where("product", isEqualTo: productId)
           .get()
           .then((result) {
         List<Comments> comments = [];
@@ -23,4 +23,30 @@ class CommentsServices{
         }
         return comments;
       });
+
+
+  Future<bool> addToCard({required Comments comment}) async {
+    try {
+
+
+      DocumentReference ref = await _firestore.collection("comments").doc();
+      comment.id = ref.id;
+      // CartItemModel item = CartItemModel.(cartItem);
+      ref.set(comment.toMap()).then((value) => true);
+
+
+
+      return true;
+      // CartItemModel item = CartItemModel.fromMap(cartItem);
+//      if(!itemExists){
+//       print("CART ITEMS ARE: ${cart.toString()}");
+      // _userServicse.addToCart(userId: _user.uid, cartItem: item);
+//      }
+
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
 }

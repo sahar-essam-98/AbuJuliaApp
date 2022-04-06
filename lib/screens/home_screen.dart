@@ -16,13 +16,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late  Categories categoryModel;
+  late  List<Categories> categoryModel;
 
   @override
   Widget build(BuildContext context) {
 
 
-    final CatProvider = Provider.of<CategoryProvider>(context);
+    final prvider = Provider.of<CategoryProvider>(context);
+    prvider.loadCategories();
+
 
 
     return Scaffold(
@@ -40,11 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundImage: AssetImage('assets/abu.jpg'),
             ),
           )),
-      body: ListView(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/products_screen');
+      body: ListView.builder(
+        itemCount: prvider.categories.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () async{
+              print("hhhh ${prvider.categories[index].id}");
+              await Provider.of<ProductProvider>(context, listen: false).loadProductsByCategory(categoryName:prvider.categories[index].id);
+              Navigator.pushNamed(context, '/products_screen',arguments: {"title":prvider.categories[index].name});
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
@@ -55,9 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child:
                     // Image.asset(
                     //   'assets/s.jpg',
-                      FadeInImage.memoryNetwork(
-                        image: categoryModel.image,
-
+                    FadeInImage.memoryNetwork(
+                      image: prvider.categories[index].image,
                       width: double.infinity,
                       height: 134.h,
                       fit: BoxFit.cover,
@@ -76,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.symmetric(vertical: 40.h),
                     child: Center(
                       child: Text(
-                        categoryModel.name,
+                        prvider.categories[index].name,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 30.sp, fontWeight: FontWeight.bold),
                       ),
@@ -85,9 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-          ),
-        ],
-      ),
+          );
+        }),
+
     );
   }
 }

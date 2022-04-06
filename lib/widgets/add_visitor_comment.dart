@@ -1,14 +1,16 @@
 
 
+import 'package:abu_julia/models/comments.dart';
+import 'package:abu_julia/providers/comment.dart';
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class AddComment extends StatefulWidget {
   var id;
-  String? category;
-  String? type;
-  AddComment( {this.category, this.id,this.type, Key? key}) : super(key: key);
+
+  AddComment( this.id,  { Key? key}) : super(key: key);
 
   @override
   _AddCommentState createState() => _AddCommentState();
@@ -145,8 +147,15 @@ class _AddCommentState extends State<AddComment> {
                             borderRadius: BorderRadius.circular(18.0.r),
                           ),
                         ),
-                        onPressed: () {
-
+                        onPressed: ()async {
+                          Comments comment = Comments(_nameTextController.text, _commentTextController.text, widget.id);
+                          await Provider.of<CommentProvider>(context,listen: false).addComment(comment);
+                          if(Provider.of<CommentProvider>(context, listen: false).isADD){
+                            print("add su");
+                          }
+                          _nameTextController.clear();
+                          _commentTextController.clear();
+                          showAlertDialog(context);
                         },
                         child: Text(
                           'إرســـــال',
@@ -166,6 +175,35 @@ class _AddCommentState extends State<AddComment> {
           ),
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    Widget continueButton = Center(
+      child: TextButton(
+          child: Text(
+            "تم إضافة التعليق بنجاح",
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: primary),
+          ),
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+          }),
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      backgroundColor: Color(0xffF2F2F2),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

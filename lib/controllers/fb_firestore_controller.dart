@@ -3,7 +3,7 @@ import 'package:abu_julia/models/products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategoryServices {
-  String collection = "categories";
+  String collection = "category";
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 

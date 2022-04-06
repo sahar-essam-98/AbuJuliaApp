@@ -1,31 +1,49 @@
+import 'package:abu_julia/db_controller/db_controller.dart';
+import 'package:abu_julia/providers/category.dart';
+import 'package:abu_julia/providers/comment.dart';
+import 'package:abu_julia/providers/fav_provider.dart';
+import 'package:abu_julia/providers/product.dart';
 import 'package:abu_julia/screens/home_screen.dart';
 import 'package:abu_julia/screens/products_screen.dart';
-import 'package:abu_julia/screens/catigory_screen.dart';
 import 'package:abu_julia/screens/favorite_screen.dart';
 import 'package:abu_julia/screens/navigator_screen.dart';
 import 'package:abu_julia/screens/product_detail.dart';
 import 'package:abu_julia/screens/splash_screen.dart';
 import 'package:abu_julia/screens/video_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DbController().initDatabase();
+  Firebase.initializeApp().then((value) {
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
+          ChangeNotifierProvider.value(value: ProductProvider.initialize()),
+          ChangeNotifierProvider.value(value: FavProvider()),
+          ChangeNotifierProvider.value(value: CommentProvider.initialize()),
+          // ChangeNotifierProvider.value(value: FavProvider.initialize()),
 
-  runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyApp(),
-    ),
-  );
+        ],
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: MyApp(),
+        ),
+      ),
+    );
+  });
 
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

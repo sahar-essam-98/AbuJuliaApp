@@ -1,14 +1,19 @@
 
+import 'package:abu_julia/providers/comment.dart';
+import 'package:abu_julia/widgets/colors.dart';
+import 'package:abu_julia/widgets/colors.dart';
+import 'package:abu_julia/widgets/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 
 class ShowComment extends StatefulWidget {
-  int? id;
-  String? category;
+  String id;
+  // String? category;
 
-  ShowComment({Key? key, this.category, this.id}) : super(key: key);
+  ShowComment(this.id, {Key? key}) : super(key: key);
 
   @override
   _ShowCommentState createState() => _ShowCommentState();
@@ -30,6 +35,11 @@ class _ShowCommentState extends State<ShowComment> {
 
   @override
   Widget build(BuildContext context) {
+
+    final prvider = Provider.of<CommentProvider>(context);
+    prvider.loadComment(widget.id);
+
+
     return isloading
         ? Center(
             child: CircularProgressIndicator(),
@@ -51,7 +61,7 @@ class _ShowCommentState extends State<ShowComment> {
                 child: Container(
                   padding: EdgeInsets.all(15.w),
                   child: ListView.builder(
-                      itemCount: 5,
+                      itemCount: prvider.comment.length,
                       itemBuilder: (context, index) {
                         return Container(
                           width: double.infinity,
@@ -59,18 +69,6 @@ class _ShowCommentState extends State<ShowComment> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Center(
-                              //   child: IconButton(
-                              //     onPressed: () {
-                              //       Navigator.of(context).pop();
-                              //     },
-                              //     icon: Icon(
-                              //       Icons.cancel_outlined,
-                              //       color: Colors.red,
-                              //       size: 35.w,
-                              //     ),
-                              //   ),
-                              // ),
                               Stack(
                                 children: [
                                   Container(
@@ -81,37 +79,29 @@ class _ShowCommentState extends State<ShowComment> {
                                       vertical: 5.h,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.6),
+                                      color: primary.withOpacity(0.6),
                                       borderRadius: BorderRadius.circular(25.r),
                                     ),
                                     child: FittedBox(
                                       child: Text(
-                                        'زائر',
+                                        prvider.comment[index].userName,
                                         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'na', fontSize: 16.sp),
                                       ),
                                     ),
-                                    // child: FittedBox(
-                                    //   child: Text(
-                                    //     '${commentData[index]['id']}' ,
-                                    //     style: TextStyle(
-                                    //         color: main3,
-                                    //         fontWeight: FontWeight.bold,
-                                    //         fontFamily: 'na',
-                                    //         fontSize: 15.sp),
-                                    //   ),
-                                    // ),
+
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(top: 30.h),
                                     padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-                                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.3), borderRadius: BorderRadius.circular(25.r)),
+                                    decoration: BoxDecoration(color: primary.withOpacity(0.3), borderRadius: BorderRadius.circular(25.r)),
                                     width: double.infinity,
                                     height: 70.h,
                                     child: FittedBox(
                                       fit: BoxFit.contain,
                                       alignment: Alignment.center ,
                                       child: AutoSizeText(
-                                       'comment',
+                                        prvider.comment[index].content,
+                                          // Provider.of<CommentProvider>(context, listen: false).loadComment();,
                                         maxFontSize: 15.sp,
                                         maxLines: 3,
                                         style: TextStyle(fontSize: 15.sp, fontFamily: 'na'),

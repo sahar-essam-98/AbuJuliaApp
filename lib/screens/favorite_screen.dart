@@ -1,6 +1,10 @@
+import 'package:abu_julia/models/favourit.dart';
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/fav_provider.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -12,6 +16,8 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<FavProvider>(context);
+    provider.read();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -19,10 +25,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           'المفضــلة',
           style: TextStyle(color: black, fontWeight: FontWeight.bold),
         ),
-        leading:
-        IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.keyboard_backspace_outlined, color: black,),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_backspace_outlined,
+            color: black,
+          ),
+        ),
 
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -37,7 +48,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: 10,
+        itemCount: provider.contacts.length,
         itemBuilder: (_, index) => Container(
           margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
           //clipBehavior: Clip.antiAlias,
@@ -47,7 +58,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           height: 150.h,
           width: 150.w,
           child: GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, '/product_details_dcreen');
             },
             child: Stack(
@@ -55,8 +66,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15.r),
-                  child: Image.asset(
-                    'assets/s.jpg',
+                  child: Image.network(
+                    provider.contacts[index].image,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -76,9 +87,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-
                         Text(
-                          ' مشاوي كباب',
+                          provider.contacts[index].name,
                           maxLines: 2,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -87,9 +97,22 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        IconButton(onPressed: (){
+                        IconButton(
+                          onPressed: () {
+                            // Favourie fav = Favourie(prvider.singleProduct.id,prvider.singleProduct.name,prvider.singleProduct.image);
+                            setState(() async {
+                              bool isRemoved = await Provider.of<FavProvider>(context, listen: false).delete(provider.contacts[index].id);
+                              if(isRemoved){
+                                print("add sucssffully")  ;
+                              }
+                            });
 
-                        }, icon: Icon(Icons.favorite_outline, color: Colors.white,)),
+                          },
+                          icon: Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                        ),
                       ],
                     ),
                   ),
