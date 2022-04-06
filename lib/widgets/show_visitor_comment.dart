@@ -95,16 +95,16 @@ class _ShowCommentState extends State<ShowComment> {
                                     padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
                                     decoration: BoxDecoration(color: primary.withOpacity(0.3), borderRadius: BorderRadius.circular(25.r)),
                                     width: double.infinity,
-                                    height: 70.h,
+                                    height: 60.h,
                                     child: FittedBox(
                                       fit: BoxFit.contain,
                                       alignment: Alignment.center ,
-                                      child: AutoSizeText(
+                                      child: Text(
                                         prvider.comment[index].content,
                                           // Provider.of<CommentProvider>(context, listen: false).loadComment();,
-                                        maxFontSize: 15.sp,
+                                        textAlign: TextAlign.right,
                                         maxLines: 3,
-                                        style: TextStyle(fontSize: 15.sp, fontFamily: 'na'),
+                                        style: TextStyle(fontSize: 12.sp, fontFamily: 'na'),
                                       ),
                                     ),
                                   ),

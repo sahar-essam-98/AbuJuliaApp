@@ -1,5 +1,6 @@
 import 'package:abu_julia/providers/product.dart';
 import 'package:abu_julia/widgets/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,6 +83,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 Padding(
                   padding: EdgeInsets.only(top: 120.h),
                   child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
                     decoration: BoxDecoration(
                       color: black.withOpacity(0.4),
                       borderRadius: BorderRadius.only(
@@ -96,10 +98,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     // color: Color(0xff0163BE).withOpacity(.4),
                     alignment: Alignment.center,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
                           prvider.productsByCategory[index].name,
-                          maxLines: 2,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontFamily: 'noto',
@@ -107,10 +109,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             color: Colors.white,
                           ),
                         ),
+                        SizedBox(width: 25.w,),
 
                         Text(
-                           prvider.productsByCategory[index].rate.toString(),style: TextStyle(color: Colors.white),
-                         ),
+                          prvider.productsByCategory[index].rate.toString(),style: TextStyle(color: Colors.white),
+                        ),
+                        SizedBox(width: 5.w,),
+                        Icon(Icons.star, color: primary,),
+
                       ],
                     ),
                   ),

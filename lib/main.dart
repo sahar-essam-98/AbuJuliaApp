@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
             // '/profile_screen':(context)=>ProfileScreen(),
             '/products_screen':(context)=> const ProductsScreen(),
             '/product_details_dcreen':(context)=>ProductDetailsScreen(),
-            'video_screen':(context)=>const VideoScreen(),
+            'video_screen':(context)=> VideoScreen(),
           },
         ),
       ),

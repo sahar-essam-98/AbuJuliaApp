@@ -1,6 +1,8 @@
+import 'package:abu_julia/screens/video_screen.dart';
 import 'package:abu_julia/widgets/add_visitor_comment.dart';
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:abu_julia/widgets/show_visitor_comment.dart';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -83,11 +85,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     print("add sucssffully")  ;
                     }
                   },
-                  icon: Icon(
-                    Icons.favorite,
-                    color:isadd? Colors.red : Colors.grey,
-                    size: 30,
-                  ),
+                    icon:FavoriteButton(
+                      // isFavorite: _controller.postData.value[index].isFavorite,
+                      iconSize: 45,
+                      iconColor: Colors.red,
+                      valueChanged: (_isFavorite) {
+
+                      },
+                    )
                 ),
               ],
             ),
@@ -103,7 +108,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 },
                 itemBuilder: (context, _) => Icon(
                   Icons.star,
-                  color: Colors.amber,
+                  color: primary,
                   size: 5,
                 ),
               ),
@@ -132,11 +137,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 style: TextButton.styleFrom(
+                  shape:RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.r)
+                  ),
                   minimumSize: const Size(0, 45),
                   backgroundColor: primary,
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'video_screen');
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>VideoScreen(url :prvider.singleProduct.videoUrl)));
                 },
                 child: const Text(
                   'مشاهـدة الفيديـو',
@@ -153,6 +161,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     width: 145.w,
                     child: ElevatedButton(
                       style: TextButton.styleFrom(
+                          shape:RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.r)
+                          ),
+
                         minimumSize: const Size(0, 35),
                         backgroundColor: primary,
                       ),
@@ -176,6 +188,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     width: 145.w,
                     child: ElevatedButton(
                       style: TextButton.styleFrom(
+                        shape:RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.r)
+                        ),
                         minimumSize: const Size(0, 35),
                         primary: const Color(0xff0163BE),
                         backgroundColor: primary,
