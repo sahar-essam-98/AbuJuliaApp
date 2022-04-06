@@ -76,56 +76,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          Container(
-            height: 110.h,
-            child: Card(
-              color: Colors.grey.shade200,
-              margin: EdgeInsets.all(20),
-              elevation: 3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.policy),
-                  Text(
-                    'الخصوصية',
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18),
-                  ),
-                  IconButton(
-                      onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
-                ],
-              ),
-            ),
-          ),
-          Container(
-            height: 110.h,
-            child: Card(
-              color: Colors.grey.shade200,
-              margin: EdgeInsets.all(20),
-              elevation: 3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.logout,
-                    color: Colors.red,
-                  ),
-                  Text(
-                    'خروج',
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                        color: Colors.red),
-                  ),
-                  IconButton(
-                    onPressed: (){
-                      SystemNavigator.pop();
-                    },
-                      icon: Icon(Icons.arrow_forward_ios))
-                ],
+         
+          GestureDetector(
+            onTap: (){
+              SystemNavigator.pop();
+            },
+            child: Container(
+              height: 110.h,
+              child: Card(
+                color: Colors.grey.shade200,
+                margin: EdgeInsets.all(20),
+                elevation: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.logout,
+                      color: Colors.red,
+                    ),
+                    Text(
+                      'خروج',
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          color: Colors.red),
+                    ),
+                    IconButton(
+                      onPressed: (){
+                        SystemNavigator.pop();
+                      },
+                        icon: Icon(Icons.arrow_forward_ios))
+                  ],
+                ),
               ),
             ),
           )

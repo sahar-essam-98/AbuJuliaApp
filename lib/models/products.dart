@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Product{
   late String id ;
   late String name ;
-  late int rate ;
+  late String rate ;
   late String image ;
   late String components;
   late String wayWork;

@@ -28,14 +28,17 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
+            activeIcon:Icon(Icons.home, color: primary,) ,
             icon: Icon(Icons.home),
             label: ''
           ),
           BottomNavigationBarItem(
+              activeIcon:Icon(Icons.favorite_outlined, color: Colors.red,) ,
             icon: Icon(Icons.favorite_outlined),
               label: ''
           ),
           BottomNavigationBarItem(
+              activeIcon:Icon(Icons.person, color: primary,) ,
             icon: Icon(Icons.person),
               label: ''
           ),
