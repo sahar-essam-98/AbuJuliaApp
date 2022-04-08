@@ -13,6 +13,8 @@ class VideoScreen extends StatefulWidget {
 
 class _VideoScreenState extends State<VideoScreen> {
   late VideoPlayerController _controller;
+  late bool isLoop;
+
 
   @override
   void initState() {
@@ -51,7 +53,7 @@ class _VideoScreenState extends State<VideoScreen> {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24.sp),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: primary,
         elevation: 0.0,
       ),
       extendBodyBehindAppBar: true,
@@ -71,7 +73,8 @@ class _VideoScreenState extends State<VideoScreen> {
             Center(
               child: _controller.value.isInitialized
                   ? AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
+                      aspectRatio: 16/9,
+                      // _controller.value.aspectRatio,
                       child: VideoPlayer(_controller),
                     )
                   : Container(),
@@ -82,11 +85,11 @@ class _VideoScreenState extends State<VideoScreen> {
             FloatingActionButton(
               backgroundColor: primary,
               onPressed: () {
-                setState(
-                  () {
-                    _controller.value.isPlaying ? _controller.pause() : _controller.play();
-                  },
-                );
+                setState(() {
+                  _controller.value.isPlaying
+                      ? _controller.pause()
+                      : _controller.play();
+                });
               },
               child: Icon(
                 _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,

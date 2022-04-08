@@ -10,6 +10,9 @@ class Product{
   late String category ;
   late String videoUrl;
   late bool isFavourite ;
+  late String cal;
+  late String type;
+  late String chefName;
 
 
   Product.fromMap(dynamic documentMap){
@@ -22,6 +25,9 @@ class Product{
     category= documentMap['category'];
     videoUrl =documentMap['videoUrl'];
     isFavourite = documentMap['isFavourite'];
+    cal = documentMap['cal'];
+    type = documentMap['type'];
+    chefName =documentMap['chefName'];
 
   }
 
@@ -36,6 +42,9 @@ class Product{
     map['category'] = category;
     map['videoUrl'] = videoUrl;
     map['isFavourite'] = isFavourite;
+    map['cal']=cal;
+    map['type'] = type;
+    map['chefName']= chefName;
     return map;
 
   }

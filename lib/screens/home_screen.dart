@@ -3,6 +3,7 @@ import 'package:abu_julia/providers/category.dart';
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:abu_julia/providers/product.dart';
@@ -25,8 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final prvider = Provider.of<CategoryProvider>(context);
     prvider.loadCategories();
 
-
-
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
@@ -34,14 +33,65 @@ class _HomeScreenState extends State<HomeScreen> {
             'وصفــات أبو جوليا',
             style: TextStyle(color: black, fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: primary,
           elevation: 0,
-          leading: Container(
-            margin: EdgeInsets.only(right: 10.w),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/abu.jpg'),
+          ),
+      drawer: Drawer(
+        backgroundColor: primary,
+        child: Column(
+          children: [
+            SizedBox(height: 70.h,),
+            Center(
+              child: Image.asset('assets/chef.png', width: 180.w, height: 200.h,),
             ),
-          )),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.swipe, color: Colors.white,),
+                SizedBox(width: 20.w,),
+                Text(
+                  'الوضع المظلم',
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.sp, color: Colors.white),
+                ),
+              ],
+            ),
+            Divider(
+              indent: 30.w,
+              endIndent: 30.w,
+              color: Colors.white,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.logout,
+                 color: Colors.white,
+                ),
+                SizedBox(width: 25.w,),
+                Text(
+                  'خــروج',
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    color: Colors.white
+                      ),
+                ),
+              ],
+            ),
+            Divider(
+              indent: 30.w,
+              endIndent: 30.w,
+              color: Colors.white,
+            ),
+
+          ],
+        ),
+      ),
       body: ListView.builder(
         itemCount: prvider.categories.length,
         itemBuilder: (context, index) {

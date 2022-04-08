@@ -35,7 +35,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           ),
         ),
 
-        backgroundColor: Colors.transparent,
+        backgroundColor: primary,
         elevation: 0,
 
         // leading: IconButton(

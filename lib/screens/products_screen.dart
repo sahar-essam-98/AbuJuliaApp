@@ -40,7 +40,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ),
 
-        backgroundColor: Colors.transparent,
+        backgroundColor: primary,
         elevation: 0,
 
         // leading: IconButton(

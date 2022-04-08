@@ -12,6 +12,7 @@
 //     return Scaffold();
 //   }
 // }
+import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,8 +41,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             )),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text('Settings',
+        backgroundColor: primary,
+        title: Text('الاعدادات',
             style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,

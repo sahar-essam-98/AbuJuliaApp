@@ -4,6 +4,7 @@ import 'package:abu_julia/providers/comment.dart';
 import 'package:abu_julia/providers/fav_provider.dart';
 import 'package:abu_julia/providers/product.dart';
 import 'package:abu_julia/screens/home_screen.dart';
+import 'package:abu_julia/screens/more_details.dart';
 import 'package:abu_julia/screens/products_screen.dart';
 import 'package:abu_julia/screens/favorite_screen.dart';
 import 'package:abu_julia/screens/navigator_screen.dart';
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
           ],
           locale: const Locale("ar"),
           debugShowCheckedModeBanner: false,
-          initialRoute: '/Navigator_screen',
+          initialRoute:'/splash_screen' ,
           routes: {
             '/splash_screen': (context) => const SplashScreen(),
             '/Navigator_screen': (context) => const NavigatorScreen(),
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
             '/products_screen':(context)=> const ProductsScreen(),
             '/product_details_dcreen':(context)=>ProductDetailsScreen(),
             'video_screen':(context)=> VideoScreen(),
+            '/more_details': (context) => MoreDetails(),
           },
         ),
       ),
