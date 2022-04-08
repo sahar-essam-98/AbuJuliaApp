@@ -106,21 +106,26 @@ class _HomeScreenState extends State<HomeScreen> {
               //   endIndent: 30,
               //   color: Colors.white,
               // ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 25.w,
-                  ),
-                  Text(
-                    'خــروج',
-                    style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
-                  ),
-                ],
+              GestureDetector(
+                onTap: (){
+                  SystemNavigator.pop();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 25.w,
+                    ),
+                    Text(
+                      'خــروج',
+                      style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
               // Divider(
               //   indent: 30,
