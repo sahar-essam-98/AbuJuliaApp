@@ -2,6 +2,7 @@ import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoScreen extends StatefulWidget {
   String? url;
@@ -15,21 +16,30 @@ class _VideoScreenState extends State<VideoScreen> {
   late VideoPlayerController _controller;
   late bool isLoop;
 
-
+  late YoutubePlayerController _controller1 ;
   @override
   void initState() {
+    print("rrrr ${widget.url}");
+    var s = widget.url?.split("=");
+    _controller1 = YoutubePlayerController(
+      initialVideoId: s![1],
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
+    // _controller = VideoPlayerController.network(widget.url!)
+    //   ..initialize().then((_) {
+    //     // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+    //     setState(() {});
+    //   });
     super.initState();
-    print(widget.url);
-    _controller = VideoPlayerController.network(widget.url!)
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
+
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    // _controller.dispose();
     super.dispose();
   }
 
@@ -71,30 +81,39 @@ class _VideoScreenState extends State<VideoScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: _controller.value.isInitialized
-                  ? AspectRatio(
-                      aspectRatio: 16/9,
-                      // _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    )
-                  : Container(),
+              child: YoutubePlayer(
+                controller: _controller1,
+                showVideoProgressIndicator: true,
+                onReady : () {
+              _controller1.addListener(() {
+                print("ggggggggg");
+              });
+              },
+              ),
+              // child: _controller.value.isInitialized
+              //     ? AspectRatio(
+              //         aspectRatio: 16/9,
+              //         // _controller.value.aspectRatio,
+              //         child: VideoPlayer(_controller),
+              //       )
+              //     : Container(),
             ),
             SizedBox(
               height: 10.h,
             ),
-            FloatingActionButton(
-              backgroundColor: primary,
-              onPressed: () {
-                setState(() {
-                  _controller.value.isPlaying
-                      ? _controller.pause()
-                      : _controller.play();
-                });
-              },
-              child: Icon(
-                _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-              ),
-            ),
+            // FloatingActionButton(
+            //   backgroundColor: primary,
+            //   onPressed: () {
+            //     setState(() {
+            //       _controller.value.isPlaying
+            //           ? _controller.pause()
+            //           : _controller.play();
+            //     });
+            //   },
+            //   child: Icon(
+            //     _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+            //   ),
+            // ),
           ],
         ),
       ),
