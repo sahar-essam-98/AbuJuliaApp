@@ -12,11 +12,13 @@
 //     return Scaffold();
 //   }
 // }
+import 'package:abu_julia/providers/theme.dart';
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -29,6 +31,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    ThemeChanger themeChanger = Provider.of<ThemeChanger>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -52,28 +56,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: ListView(
         children: [
 
-
-
-          Container(
-            height: 110.h,
-            child: Card(
-              color: Colors.grey.shade200,
-              margin: EdgeInsets.all(20),
-              elevation: 3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.swipe),
-                  Text(
-                    'الوضع المظلم',
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18),
-                  ),
-                  IconButton(
-                      onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
-                ],
+          GestureDetector(
+            onTap: (){
+              themeChanger.setTheme(ThemeData.light());
+            },
+            child: Container(
+              height: 110.h,
+              child: Card(
+                color: Colors.grey,
+                margin: EdgeInsets.all(20),
+                elevation: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(Icons.swipe, color: Colors.white,),
+                    Text(
+                      'الوضع المضيء',
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
+                  ],
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              themeChanger.setTheme(ThemeData.dark());
+            },
+            child: Container(
+              height: 110.h,
+              child: Card(
+                color: Colors.grey,
+                margin: EdgeInsets.all(20),
+                elevation: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(Icons.swipe),
+                    Text(
+                      'الوضع المظلم',
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
+                  ],
+                ),
               ),
             ),
           ),
@@ -85,11 +120,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Container(
               height: 110.h,
               child: Card(
-                color: Colors.grey.shade200,
+                color: Colors.grey,
                 margin: EdgeInsets.all(20),
                 elevation: 3,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Icon(
                       Icons.logout,

@@ -3,6 +3,7 @@ import 'package:abu_julia/providers/category.dart';
 import 'package:abu_julia/providers/comment.dart';
 import 'package:abu_julia/providers/fav_provider.dart';
 import 'package:abu_julia/providers/product.dart';
+import 'package:abu_julia/providers/theme.dart';
 import 'package:abu_julia/screens/home_screen.dart';
 import 'package:abu_julia/screens/more_details.dart';
 import 'package:abu_julia/screens/products_screen.dart';
@@ -11,6 +12,7 @@ import 'package:abu_julia/screens/navigator_screen.dart';
 import 'package:abu_julia/screens/product_detail.dart';
 import 'package:abu_julia/screens/splash_screen.dart';
 import 'package:abu_julia/screens/video_screen.dart';
+import 'package:abu_julia/widgets/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -49,33 +51,47 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
-    builder: () => MediaQuery(
+      builder: () => MediaQuery(
         data: const MediaQueryData(),
-        child: MaterialApp(
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale("ar"),
-          ],
-          locale: const Locale("ar"),
-          debugShowCheckedModeBanner: false,
-          initialRoute:'/splash_screen' ,
-          routes: {
-            '/splash_screen': (context) => const SplashScreen(),
-            '/Navigator_screen': (context) => const NavigatorScreen(),
-            '/home_screen':(context)=>const HomeScreen(),
-            '/favorite_screen':(context)=>const FavoriteScreen(),
-            // '/profile_screen':(context)=>ProfileScreen(),
-            '/products_screen':(context)=> const ProductsScreen(),
-            '/product_details_dcreen':(context)=>ProductDetailsScreen(),
-            'video_screen':(context)=> VideoScreen(),
-            '/more_details': (context) => MoreDetails(),
-          },
+        child: ChangeNotifierProvider<ThemeChanger>(
+          create: (BuildContext context) => ThemeChanger(themeData: ThemeData.light()),
+          child: MaterialWithTheme(),
         ),
       ),
+    );
+  }
+}
+
+class MaterialWithTheme extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final theme= Provider.of<ThemeChanger>(context);
+    return MaterialApp(
+      theme:theme.getTheme(),
+
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("ar"),
+      ],
+      locale: const Locale("ar"),
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+      routes: {
+        '/splash_screen': (context) => const SplashScreen(),
+        '/Navigator_screen': (context) => const NavigatorScreen(),
+        '/home_screen':(context)=>const HomeScreen(),
+        '/favorite_screen':(context)=>const FavoriteScreen(),
+        // '/profile_screen':(context)=>ProfileScreen(),
+        '/products_screen':(context)=> const ProductsScreen(),
+        '/product_details_dcreen':(context)=>ProductDetailsScreen(),
+        'video_screen':(context)=> VideoScreen(),
+        '/more_details': (context) => MoreDetails(),
+      },
     );
   }
 }
