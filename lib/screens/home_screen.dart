@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'وصفــات أبو جوليا',
+          'وصفــاتي',
           style: TextStyle(color: black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: primary,

@@ -1,5 +1,7 @@
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -22,21 +24,21 @@ class _SplashScreenState extends State<SplashScreen> {
     @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primary,
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset('assets/Pan.png'),
+            child: Lottie.asset('assets/savoring-food.json',fit: BoxFit.contain, width: 250.w, height: 250.h),
           ),
           SizedBox(
             height: 25,
           ),
           Center(
             child: Text(
-              'وصفــات أبـو جوليـــا          ',
-              style: TextStyle(fontFamily: 'sans', color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+              'وصفـــــــــــاتي',
+              style: TextStyle( color: primary, fontSize: 30.sp, fontWeight: FontWeight.w900),
             ),
           ),
         ],
