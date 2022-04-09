@@ -79,8 +79,7 @@ class _VideoScreenState extends State<VideoScreen> {
           // color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(10.r),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
             Center(
               child: YoutubePlayer(
@@ -98,11 +97,9 @@ class _VideoScreenState extends State<VideoScreen> {
               //         // _controller.value.aspectRatio,
               //         child: VideoPlayer(_controller),
               //       )
-              //     : Container(),
+
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+
             // FloatingActionButton(
             //   backgroundColor: primary,
             //   onPressed: () {
