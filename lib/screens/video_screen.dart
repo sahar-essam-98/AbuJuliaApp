@@ -28,6 +28,7 @@ class _VideoScreenState extends State<VideoScreen> {
         mute: false,
       ),
     );
+
     // _controller = VideoPlayerController.network(widget.url!)
     //   ..initialize().then((_) {
     //     // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.

@@ -29,13 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.81"
-  boolean_selector:
-    dependency: transitive
-    description:
-      name: boolean_selector
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -113,13 +106,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  fake_async:
-    dependency: transitive
-    description:
-      name: fake_async
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0"
   fancy_drawer:
     dependency: "direct main"
     description:
@@ -195,13 +181,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_lints:
-    dependency: "direct dev"
+  flutter_inappwebview:
+    dependency: transitive
     description:
-      name: flutter_lints
+      name: flutter_inappwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.4"
+    version: "5.3.2"
+  flutter_launcher_icons_maker:
+    dependency: "direct dev"
+    description:
+      name: flutter_launcher_icons_maker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.2"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -228,11 +221,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
-  flutter_test:
-    dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -290,10 +278,10 @@ packages:
   lottie:
     dependency: "direct main"
     description:
-      name: matcher
+      name: lottie
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.11"
+    version: "1.2.2"
   material_color_utilities:
     dependency: transitive
     description:
@@ -488,20 +476,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
-  stack_trace:
-    dependency: transitive
-    description:
-      name: stack_trace
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.10.0"
-  stream_channel:
-    dependency: transitive
-    description:
-      name: stream_channel
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:
@@ -523,13 +497,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  test_api:
-    dependency: transitive
-    description:
-      name: test_api
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.8"
   transparent_image:
     dependency: "direct main"
     description:
@@ -656,6 +623,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.3.1"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   youtube_player_flutter:
     dependency: "direct main"
     description:

@@ -53,6 +53,7 @@ dependencies:
   better_player: ^0.0.81
   path_provider: ^2.0.5
   fancy_drawer: ^2.0.0
+
   lottie: ^1.2.2
   youtube_player_flutter: ^8.0.0
   shared_preferences:
