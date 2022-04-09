@@ -1,6 +1,7 @@
 import 'package:abu_julia/widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _VideoScreenState extends State<VideoScreen> {
                       // _controller.value.aspectRatio,
                       child: VideoPlayer(_controller),
                     )
-                  : Container(),
+                  : Lottie.asset('assets/spoon.json', height: 250.h, width: 250.w, fit: BoxFit.contain),
             ),
             SizedBox(
               height: 10.h,
