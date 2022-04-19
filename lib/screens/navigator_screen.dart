@@ -1,3 +1,5 @@
+import 'package:abu_julia/screens/country_screen.dart';
+import 'package:abu_julia/screens/countryproduct.dart';
 import 'package:abu_julia/screens/favorite_screen.dart';
 import 'package:abu_julia/screens/home_screen.dart';
 import 'package:abu_julia/screens/profile_screen.dart';
@@ -16,6 +18,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
 
   final pages = [
      HomeScreen(),
+    CountryScreen(),
      FavoriteScreen(),
      ProfileScreen(),
   ];
@@ -31,6 +34,11 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
             activeIcon:Icon(Icons.home, color: primary,) ,
             icon: Icon(Icons.home),
             label: ''
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Icon(Icons.language, color: primary,),
+            icon: Icon(Icons.language),
+            label: '',
           ),
           BottomNavigationBarItem(
               activeIcon:Icon(Icons.favorite_outlined, color: Colors.red,) ,

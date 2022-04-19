@@ -18,6 +18,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<FavProvider>(context);
     provider.read();
+    print(provider.contacts.length);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -34,24 +35,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             color: black,
           ),
         ),
-
         backgroundColor: primary,
         elevation: 0,
-
-        // leading: IconButton(
-        //    onPressed: () {},
-        //    icon: Icon(
-        //      Icons.format_list_bulleted,
-        //      color: black,
-        //    ),
-        //  ),
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemCount: provider.contacts.length,
         itemBuilder: (_, index) => Container(
           margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
-          //clipBehavior: Clip.antiAlias,
+
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.r),
           ),
@@ -77,12 +69,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     decoration: BoxDecoration(
                       color: black.withOpacity(0.4),
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(10.r), topRight: Radius.circular(10.r)),
-                      // gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
-                      //   Colors.black.withOpacity(0.8),
-                      //   Colors.grey.withOpacity(0.8),
-                      // ]),
+
                     ),
-                    // color: Color(0xff0163BE).withOpacity(.4),
                     alignment: Alignment.center,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -102,11 +90,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             // Favourie fav = Favourie(prvider.singleProduct.id,prvider.singleProduct.name,prvider.singleProduct.image);
                             setState(() async {
                               bool isRemoved = await Provider.of<FavProvider>(context, listen: false).delete(provider.contacts[index].id);
-                              if(isRemoved){
-                                print("add sucssffully")  ;
+                              if (isRemoved) {
+                                // show snak bar remover ucessfully
+                                print("add sucssffully");
                               }
                             });
-
                           },
                           icon: Icon(
                             Icons.favorite,

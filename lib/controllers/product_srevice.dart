@@ -16,7 +16,7 @@ Future<List<Product>> getAllProducts() async {
   if(query.docs.isNotEmpty){
     query.docs.forEach((element) {
       dd.add(Product.fromMap(element.data()));
-      print("gfhsf ${dd[0].name}");
+      // print("gfhsf ${dd[0].name}");
     });
   }
 
@@ -37,6 +37,21 @@ Future<List<Product>> getProductsOfCategory({required String category}) async =>
       }
       return products;
     });
+
+
+Future<List<Product>> getProductsOfCountry({required String country}) async =>
+    _firestore
+        .collection(collection)
+        .where("country", isEqualTo: country)
+        .get()
+        .then((result) {
+      List<Product> products = [];
+      for (DocumentSnapshot product in result.docs) {
+        products.add(Product.fromMap(product));
+      }
+      return products;
+    });
+
 
 Future<Product> getProductById({required String id}) async =>
     _firestore

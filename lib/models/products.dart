@@ -13,6 +13,8 @@ class Product{
   late String cal;
   late String type;
   late String chefName;
+  late String country;
+
 
 
   Product.fromMap(dynamic documentMap){
@@ -28,6 +30,7 @@ class Product{
     cal = documentMap['cal'];
     type = documentMap['type'];
     chefName =documentMap['chefName'];
+    country = documentMap['country'];
 
   }
 
@@ -45,6 +48,7 @@ class Product{
     map['cal']=cal;
     map['type'] = type;
     map['chefName']= chefName;
+    map['country'] = country;
     return map;
 
   }

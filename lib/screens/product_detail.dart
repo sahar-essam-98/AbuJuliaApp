@@ -76,19 +76,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                   IconButton(
                       onPressed: () async {
+                        print("fffffffrt34");
                         Favourie fav = Favourie(prvider.singleProduct.id, prvider.singleProduct.name, prvider.singleProduct.image);
                         setState(() async {
+
                           isadd = await Provider.of<FavProvider>(context, listen: false).create(fav);
                         });
                         if (isadd) {
                           print("add sucssffully");
-                        }
+                        }else{
+                          print("fffffff");                        }
                       },
                       icon: FavoriteButton(
+
                         // isFavorite: _controller.postData.value[index].isFavorite,
                         iconSize: 45.w,
                         iconColor: Colors.red,
-                        valueChanged: (_isFavorite) {},
+                        valueChanged: (_isFavorite) async {
+                          print("fffffffrt34");
+                          Favourie fav = Favourie(prvider.singleProduct.id, prvider.singleProduct.name, prvider.singleProduct.image);
+                          isadd = await Provider.of<FavProvider>(context, listen: false).create(fav);
+                          // setState(()  {
+                          // });
+                          if (isadd) {
+                            //show snak bar added sucessfully
+                          }else{
+                            print("fffffff");                        }
+                        },
                       )),
                 ],
               ),

@@ -4,6 +4,7 @@ import 'package:abu_julia/providers/comment.dart';
 import 'package:abu_julia/providers/fav_provider.dart';
 import 'package:abu_julia/providers/product.dart';
 import 'package:abu_julia/providers/theme.dart';
+import 'package:abu_julia/screens/countryproduct.dart';
 import 'package:abu_julia/screens/home_screen.dart';
 import 'package:abu_julia/screens/more_details.dart';
 import 'package:abu_julia/screens/products_screen.dart';
@@ -12,7 +13,6 @@ import 'package:abu_julia/screens/navigator_screen.dart';
 import 'package:abu_julia/screens/product_detail.dart';
 import 'package:abu_julia/screens/splash_screen.dart';
 import 'package:abu_julia/screens/video_screen.dart';
-import 'package:abu_julia/widgets/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -86,7 +86,7 @@ class MaterialWithTheme extends StatelessWidget {
         '/Navigator_screen': (context) => const NavigatorScreen(),
         '/home_screen':(context)=>const HomeScreen(),
         '/favorite_screen':(context)=>const FavoriteScreen(),
-        // '/profile_screen':(context)=>ProfileScreen(),
+        '/ProductByCountryScreen' : (context) => ProductByCountryScreen(),
         '/products_screen':(context)=> const ProductsScreen(),
         '/product_details_dcreen':(context)=>ProductDetailsScreen(),
         'video_screen':(context)=> VideoScreen(),

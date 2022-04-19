@@ -1,4 +1,5 @@
 import 'package:abu_julia/models/categories.dart';
+import 'package:abu_julia/models/counrty.dart';
 import 'package:abu_julia/providers/category.dart';
 import 'package:abu_julia/providers/theme.dart';
 import 'package:abu_julia/widgets/colors.dart';
@@ -10,27 +11,27 @@ import 'package:provider/provider.dart';
 import 'package:abu_julia/providers/product.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class CountryScreen extends StatefulWidget {
+  const CountryScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _CountryScreenState createState() => _CountryScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>  {
-  late List<Categories> categoryModel;
+class _CountryScreenState extends State<CountryScreen> {
+  late List<Countries> countryModel;
 
   @override
   Widget build(BuildContext context) {
     final prvider = Provider.of<CategoryProvider>(context);
     ThemeChanger themeChanger = Provider.of<ThemeChanger>(context);
-    prvider.loadCategories();
+    prvider.loadCountries();
 
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'الأصنــــاف',
+          'الدول',
           style: TextStyle(color: black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: primary,
@@ -76,11 +77,7 @@ class _HomeScreenState extends State<HomeScreen>  {
               SizedBox(
                 height: 15.h,
               ),
-              // Divider(
-              //   indent: 30,
-              //   endIndent: 30,
-              //   color: Colors.white,
-              // ),
+
               GestureDetector(
                 onTap: () {
                   themeChanger.setTheme(ThemeData.dark());
@@ -105,11 +102,7 @@ class _HomeScreenState extends State<HomeScreen>  {
               SizedBox(
                 height: 15.h,
               ),
-              // Divider(
-              //   indent: 30,
-              //   endIndent: 30,
-              //   color: Colors.white,
-              // ),
+
               GestureDetector(
                 onTap: () {
                   SystemNavigator.pop();
@@ -131,65 +124,59 @@ class _HomeScreenState extends State<HomeScreen>  {
                   ],
                 ),
               ),
-              // Divider(
-              //   indent: 30,
-              //   endIndent: 30,
-              //   color: Colors.white,
-              // ),
+
             ],
           ),
         ),
       ),
       body: ListView.builder(
-            itemCount: prvider.categories.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () async {
-                  print("hhhh ${prvider.categories[index].id}");
-                  await Provider.of<ProductProvider>(context, listen: false).loadProductsByCategory(categoryName: prvider.categories[index].id);
-                  Navigator.pushNamed(context, '/products_screen', arguments: {"title": prvider.categories[index].name});
-                },
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15.r),
-                        child:
-                            // Image.asset(
-                            //   'assets/s.jpg',
-                            FadeInImage.memoryNetwork(
-                          image: prvider.categories[index].image,
-                          width: double.infinity,
-                          height: 134.h,
-                          fit: BoxFit.cover,
-                          placeholder: kTransparentImage,
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.4),
-                          borderRadius: BorderRadius.circular(15.r),
-                        ),
-                        height: 134,
-                        // height: 150,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 40.h),
-                        child: Center(
-                          child: Text(
-                            prvider.categories[index].name,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 30.sp, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }),
-    );
+          itemCount: prvider.countries.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () async {
+                print("hhhh ${prvider.countries[index].id}");
+                await Provider.of<ProductProvider>(context, listen: false).loadProductByCountry(country: prvider.countries[index].id);
+                Navigator.pushNamed(context, '/ProductByCountryScreen', arguments: {"title": prvider.countries[index].name});
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15.r),
+                      child:
 
+                          FadeInImage.memoryNetwork(
+                        image: prvider.countries[index].image,
+                        width: double.infinity,
+                        height: 134.h,
+                        fit: BoxFit.cover,
+                        placeholder: kTransparentImage,
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.4),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
+                      height: 134,
+
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 40.h),
+                      child: Center(
+                        child: Text(
+                          prvider.countries[index].name,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 30.sp, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+    );
   }
 }

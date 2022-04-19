@@ -6,6 +6,7 @@ class ProductProvider with ChangeNotifier {
   ProductServices _productServices = ProductServices();
   List<Product> products = [];
   List<Product> productsByCategory = [];
+  List<Product> productByCountry = [];
   late Product singleProduct;
   late bool addS;
 
@@ -21,6 +22,12 @@ class ProductProvider with ChangeNotifier {
   Future loadProductsByCategory({required String categoryName}) async {
     productsByCategory =
     await _productServices.getProductsOfCategory(category: categoryName);
+    notifyListeners();
+  }
+
+  Future loadProductByCountry({required String country}) async {
+
+    productByCountry = await _productServices.getProductsOfCountry(country: country);
     notifyListeners();
   }
 
